@@ -7,10 +7,10 @@
           <input type="text" name="title" v-model="title">
       </div>
       <div v-for="(ing, i) in ingredients" 
-      :key="i">
+      :key="i" class="field">
       <label for="ingredient">ingredients: </label>
       <input type="text" name="ingredient" v-model="ingredients[i]"/>
-      
+      <i class="material-icons delete" @click="deleteIng(ing)">delete</i>
       </div>
       <div class="field add-ingredient">
           <label for="add-ingredient">add an ingredient:</label>
@@ -78,6 +78,11 @@ export default {
                 this.feedback = 'You must enter a value to add an ingredient';
             }
         },
+        deleteIng(ing) {
+            this.ingredients = this.ingredients.filter(ingredient => {
+                return ingredient != ing;
+            });
+        },
     },
 };
 </script>
@@ -94,6 +99,15 @@ export default {
     }
     .field {
         margin: 20px auto;
+        position: relative;
+    }
+    .delete {
+        position: absolute;
+        right: 0;
+        bottom: 16px;
+        color: #aaa;
+        font-size: 1.4em;
+        cursor: pointer;
     }
 }
 </style>
